@@ -3,7 +3,6 @@ import urllib
 from fpdf import FPDF
 from PIL import Image
 #funcion de descarga de la pagina web
-#..
 def gethtml(url):
 	try:
 		req = urllib2.Request(url)
@@ -11,7 +10,7 @@ def gethtml(url):
 	except Exception, e:
 		print e
 		return ''
-#link de prueba 
+#link de prueba
 #url = 'http://www.slideshare.net/gloriaortizh/pop-up-books-9941995?qid=024b0da4-45e4-4b7e-9711-3c808c510ad5&v=qf1&b=&from_search=1'
 url=raw_input('ingrese url de sildeshare:\n')
 html=gethtml(url)
