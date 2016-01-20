@@ -2,6 +2,7 @@ from fpdf import FPDF
 from PIL import Image
 import searchfile
 
+<<<<<<< HEAD
 class Slideshare:
 	def __init__():
 		self.arg = arg
@@ -22,3 +23,16 @@ class Slideshare:
 			pdf.image(aux, x=0, y=0)
 		pdf.output('test.pdf', 'F')
 		
+=======
+pdf = FPDF('P', 'pt', 'Letter')
+print  "\ndownload ", len(images), " images\n"
+
+filepath_index = 0
+for url in images:
+	filepath = urllib.urlretrieve(url)[filepath_index]
+	img = Image.open(filepath)
+	size = img.size
+	pdf.add_page(format = size)
+	pdf.image(aux, x=0, y=0)
+pdf.output('test.pdf', 'F')
+>>>>>>> 5282a7cc4269db6c5d0d63a6832a7826c4aebdf7
