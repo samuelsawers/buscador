@@ -30,10 +30,12 @@ for x in sections:
 
 pdf = FPDF('P', 'pt', 'Letter')
 print  "\ndownload ", len(images), " images\n"
-for pag in images:
-	aux=urllib.urlretrieve(pag)[0]
-	img=Image.open(aux)
-	size=img.size
+
+filepath_index = 0
+for url in images:
+	filepath = urllib.urlretrieve(url)[filepath_index]
+	img = Image.open(filepath)
+	size = img.size
 	pdf.add_page(format = size)
 	pdf.image(aux, x=0, y=0)
 pdf.output('test.pdf', 'F')
