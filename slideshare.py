@@ -1,39 +1,24 @@
-import urllib2
-import urllib
 from fpdf import FPDF
 from PIL import Image
-#funcion de descarga de la pagina web
-def gethtml(url):
-	try:
-		req = urllib2.Request(url)
-		return urllib2.urlopen(req).read()
-	except Exception, e:
-		print e
-		return ''
-#link de prueba
-#url = 'http://www.slideshare.net/gloriaortizh/pop-up-books-9941995?qid=024b0da4-45e4-4b7e-9711-3c808c510ad5&v=qf1&b=&from_search=1'
-url=raw_input('ingrese url de sildeshare:\n')
-html=gethtml(url)
-cad=html.split('<div class="slide_container">')[1]
-sections = cad.split('section')
-images=[]
-i = 1
-j = 0
-for x in sections:
-	i+=1
-	if i % 2 == 1:
-		aux = x.split('"')[13]
-		if aux.find('slideshare') > -1:
-			images.append(aux.split('?')[0])
-			print images[j]
-			j += 1
+import searchfile
 
-pdf = FPDF('P', 'pt', 'Letter')
-print  "\ndownload ", len(images), " images\n"
-for pag in images:
-	aux=urllib.urlretrieve(pag)[0]
-	img=Image.open(aux)
-	size=img.size
-	pdf.add_page(format = size)
-	pdf.image(aux, x=0, y=0)
-pdf.output('test.pdf', 'F')
+class Slideshare:
+	def __init__():
+		self.arg = arg
+
+	def get_file(self, url):
+		url=raw_input('ingrese url de sildeshare:\n')
+#		d = Download('http://www.slideshare.net/gloriaortizh/pop-up-books-9941995?qid=024b0da4-45e4-4b7e-9711-3c808c510ad5&v=qf1&b=&from_search=1')
+		d = Download(url)
+		print d.get_tag('div', 'class', 'slide_container')
+/*
+		pdf = FPDF('P', 'pt', 'Letter')
+		print  "\ndownload ", len(images), " images\n"
+		for pag in images:
+			aux=urlretrieve(pag)[0]
+			img=Image.open(aux)
+			size=img.size
+			pdf.add_page(format = size)
+			pdf.image(aux, x=0, y=0)
+		pdf.output('test.pdf', 'F')
+		
