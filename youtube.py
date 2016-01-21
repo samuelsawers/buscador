@@ -11,6 +11,7 @@ class Youtube:
 			yt = YouTube(url)
 			yt.get_videos()
 			video = yt.filter(codec)[0]
+			print 'file name:', video.filename
 			video.download(location, on_progress=utils.print_status)
 		except Exception, e:
 			print "Error: Invalid URL or network problem or file exist"
@@ -27,9 +28,7 @@ class Youtube:
 				links = d.get_urls('youtube', videos, 'href')
 				video_url_preffix = 'https://www.youtube.com'
 				for valor in links:
-					print video_url_preffix+valor
 					valor = (video_url_preffix+valor).split('&')[0]
-					print valor
 					self.download_now(str(valor), 'mp4', '/Users/samuel/Documents/python')
 					print '\n'
 				print 'se descargo la lista el archivo'
@@ -38,9 +37,7 @@ class Youtube:
 	def get_file(self, url):
 		position_link = 0
 		if url.find('youtube.com')>position_link:
-			print url
 			valor = (url).split('&')[0]
-			print valor
 			self.download_now(str(valor), 'mp4', '/Users/samuel/Documents/python')
 			print '\nse descargo el video'
 		else: print 'link de youtube no hace referencia a un archivo valido'
@@ -50,5 +47,9 @@ class Youtube:
 youtube = Youtube()
 #url = 'https://www.youtube.com/watch?v=qEvnwW-YtRw&list=PLOcurmo_gZqZPgMdgj_J14IH5VQLkXY_9'
 #url = 'https://www.youtube.com/watch?v=fRh_vgS2dFE&index=4&list=PLSFitF4B6yNS82pcRx5XvD1PB6m8lIs5J'
+opcion = raw_input('options\n press 1 and enter for download a list video\n press 2 and enter for download a video\n')
 url = raw_input('ingrese url de youtube:\n')
-youtube.get_file(url)
+if opcion == '1':
+	youtube.get_files(url)
+if opcion == '2':
+	youtube.get_file(url)
