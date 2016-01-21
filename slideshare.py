@@ -13,7 +13,7 @@ class Slideshare:
 			d = Download(url)
 			imgs = d.get_tags('img', 'class', 'slide_image')
 			if imgs != 'error':
-				links = d.get_urls(imgs, 'data-full')
+				links = d.get_urls('slideshare', imgs, 'data-full')
 				pdf = FPDF('P', 'pt', 'Letter')
 				index_cache = 0
 				index_link = 0

@@ -23,10 +23,20 @@ class Download():
 		else :
 			return "error"
 
-	def get_urls(self, etiquetas, attribute):
+	def get_tags_html(self, html, tag, attribute, value):
+		if html != 'error':
+			soup = BeautifulSoup(html,'html.parser')
+			return soup.findAll(tag, attrs={attribute:value})
+		else :
+			return "error"
+
+	def get_urls(self, type_search, etiquetas, attribute):
 		links=[]
 		for index in range(len(etiquetas)):
 			soup = BeautifulSoup(str(etiquetas[index]), 'lxml')
-			newtag = soup.img
+			if type_search == 'slideshare':
+				newtag = soup.img
+			if type_search == 'youtube':
+				newtag = soup.a
 			links.append(newtag[attribute])
 		return links
