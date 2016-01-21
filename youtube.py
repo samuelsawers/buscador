@@ -1,5 +1,6 @@
 from pytube import YouTube
 from searchfile import Download
+from pytube import utils
 
 class Youtube:
 	def __init__(self):
@@ -10,7 +11,7 @@ class Youtube:
 			yt = YouTube(url)
 			yt.get_videos()
 			video = yt.filter(codec)[0]
-			video.download(location)
+			video.download(location, on_progress=utils.print_status)
 		except Exception, e:
 			print e
 			print "Error: Invalid URL or network problem"
@@ -31,13 +32,23 @@ class Youtube:
 					valor = (video_url_preffix+valor).split('&')[0]
 					print valor
 					self.download_now(str(valor), 'mp4', '/Users/samuel/Documents/python')
-				print 'se bdescargo la lista el archivo'
-			else: print 'link de slideshare no hace referencia a un archivo valido'
+				print 'se descargo la lista el archivo'
+			else: print 'link de youtube no hace referencia a un archivo valido'
 
-#		else: print 'link de slideshare no es valido'
+	def get_file(self, url):
+		position_link = 0
+		if url.find('youtube.com')>position_link:
+			print url
+			valor = (url).split('&')[0]
+			print valor
+			self.download_now(str(valor), 'mp4', '/Users/samuel/Documents/python')
+			print 'se descargo el video'
+		else: print 'link de youtube no hace referencia a un archivo valido'
 
 
-url = 'https://www.youtube.com/watch?v=qEvnwW-YtRw&list=PLOcurmo_gZqZPgMdgj_J14IH5VQLkXY_9'
-#url = raw_input('ingrese url de sildeshare:\n')
+# Muestra una barra de progreso que se actualiza en una misma linea. Ejemplo de uso:
 youtube = Youtube()
-youtube.get_files(url)
+#url = 'https://www.youtube.com/watch?v=qEvnwW-YtRw&list=PLOcurmo_gZqZPgMdgj_J14IH5VQLkXY_9'
+url = 'https://www.youtube.com/watch?v=fRh_vgS2dFE&index=4&list=PLSFitF4B6yNS82pcRx5XvD1PB6m8lIs5J'
+#url = raw_input('ingrese url de youtube:\n')
+youtube.get_file(url)
