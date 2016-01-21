@@ -23,16 +23,10 @@ class Download():
 		else :
 			return "error"
 
-	def get_url(self, etiquetas):
+	def get_urls(self, etiquetas, attribute):
 		links=[]
-#		for index in range(len(etiquetas)):
-		soup = BeautifulSoup(etiquetas, 'lxml')
-		newtag = soup.img
-		print "data=", newtag['data-normal']
-
-d = Download('http://www.slideshare.net/gloriaortizh/pop-up-books-9941995?qid=024b0da4-45e4-4b7e-9711-3c808c510ad5&v=qf1&b=&from_search=1')
-#imgs=['<img alt="POSTITULO DE GRABADO    ESPACIO CURRICULAR: SEMINARIOALUMNA: GLORIA LUCIA ORTIZ HOYOS                      ESCUELA DE ARTE..." class="slide_image" data-full="http://image.slidesharecdn.com/popupbooks-111029161802-phpapp02/95/pop-up-books-1-1024.jpg?cb=1319905157" data-normal="http://image.slidesharecdn.com/popupbooks-111029161802-phpapp02/95/pop-up-books-1-728.jpg?cb=1319905157" data-small="http://image.slidesharecdn.com/popupbooks-111029161802-phpapp02/85/pop-up-books-1-320.jpg?cb=1319905157" src="http://image.slidesharecdn.com/popupbooks-111029161802-phpapp02/95/pop-up-books-1-728.jpg?cb=1319905157"/>', '<img alt="\u2022 Con esta breve presentaci\xf3n deseo lograr un acercamiento al maravilloso  tema de los libros desplegables, transitar por ..." class="slide_image" data-full="http://image.slidesharecdn.com/popupbooks-111029161802-phpapp02/95/pop-up-books-2-1024.jpg?cb=1319905157" data-normal="http://image.slidesharecdn.com/popupbooks-111029161802-phpapp02/95/pop-up-books-2-728.jpg?cb=1319905157" data-small="http://image.slidesharecdn.com/popupbooks-111029161802-phpapp02/85/pop-up-books-2-320.jpg?cb=1319905157" src=""/>']
-imgs = d.get_tags('img', 'class', 'slide_image')
-print imgs[0]
-print len(imgs[0])
-d.get_url(imgs)
+		for index in range(len(etiquetas)):
+			soup = BeautifulSoup(str(etiquetas[index]), 'lxml')
+			newtag = soup.img
+			links.append(newtag[attribute])
+		return links
